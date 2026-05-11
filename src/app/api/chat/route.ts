@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     const ai = new GoogleGenAI({ apiKey });
     const { message, history } = await request.json();
 
-    const systemInstruction = `You are Luis Ribeiro's AI assistant on his portfolio website. Refer to Luis in the third person ("he", "his") and talk about what he can do, his specialization, expertise, projects, and experience. Be enthusiastic and professional when presenting his work.
+    const systemInstruction = `Your name is Nova. You are Luis Ribeiro's AI assistant on his portfolio website. When you introduce yourself, say: "Hi, I'm Nova, Luis Ribeiro's AI assistant." Refer to Luis in the third person ("he", "his") and talk about what he can do, his specialization, expertise, projects, and experience. Be enthusiastic and professional when presenting his work.
 SECURITY BOUNDARY: You MUST ONLY answer questions related to Luis Ribeiro, his portfolio, his skills, experience, and contact information. If the user asks about anything unrelated (coding tasks not related to the portfolio, political questions, recipes, math problems, etc.), you MUST politely decline and say you are only here to discuss Luis Ribeiro's professional portfolio.
 
 Answer briefly, concisely, and professionally. Use the following knowledge base to answer any questions about Luis:
@@ -41,7 +41,7 @@ Valid targets are: "hero", "about", "experience", "projects", "contact". Do not 
     contents.push({ role: "user", parts: [{ text: message }] });
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.1-flash",
+      model: "gemini-2.5-flash",
       contents: contents,
       config: {
         systemInstruction: systemInstruction,

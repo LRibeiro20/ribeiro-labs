@@ -1,0 +1,101 @@
+ 
+and GCS for asynchronous processing and real-time AI responses. 
+● Design and deploy cloud-native, event-driven architectures with Cloud Run, Cloud Scheduler, 
+ 
+enabling intelligent answers from legal gazettes and user-uploaded documents. 
+● Build AI-powered Retrieval-Augmented Generation (RAG) pipelines using Google Vertex AI, 
+ 
+messaging, and document workflows for legal-tech platforms. 
+● Architect and maintain scalable backend systems using Flask, focusing on secure authentication, 
+Jun 2025 – Present | Maputo, Mozambique 
+Transdigital — Software Engineer 
+Professional Experience 
+ 
+Strong foundational knowledge in data structures, algorithms, and software architecture principles. 
+Bachelor's Degree in Computer Science, Germany (Graduated: 2025) 
+IU International University of Applied Sciences 
+Education 
+ 
+ 
+and designing scalable cloud-native architectures on GCP. 
+with Python (Flask/FastAPI), crafting high-performance mobile experiences using React Native (Expo), 
+complex, probabilistic AI environments. My expertise spans developing robust backend infrastructures 
+research and production-ready systems, transitioning from deterministic programming to building 
+products from the ground up. I specialize in bridging the gap between cutting-edge machine learning 
+Innovative Software Engineer with a proven track record of architecting and scaling high-impact digital 
+About 
+ 
+ luluribas105@gmail.com 
+ +258 861469997 
+Maputo, Mozambique |  Open to Remote | Willing to Relocate  
+Software Engineer 
+Luis Ribeiro 
+----------------Page (0) Break----------------
+ 
+● Built responsive and accessible web interfaces, achieving 100% mobile compatibility. 
+Apr 2022 – Mar 2023 | Maputo, Mozambique 
+Upgrade Consultorias, Lda — Frontend Developer 
+ 
+● Resolved production issues with a 90% first-time resolution rate, minimizing downtime. 
+● Delivered cloud-based AI deployments with high reliability and client retention. 
+ 
+● Led integration of a recommendation system, improving client productivity by ~25%. 
+ 
+● Optimized ML models, reducing error rates by ~50% through continuous training and tuning. 
+ 
+accuracy and 95% client satisfaction. 
+● Built and deployed AI-based chatbot solutions for 5 enterprise clients, achieving 98% model 
+May 2023 – Feb 2024 | Maputo, Mozambique 
+Transdigital, Lda — Software Developer 
+● Collaborated closely with product and design to improve UX and performance. 
+ 
+rollouts. 
+● Delivered stable releases with 98% test coverage, supporting rapid iteration and reliable feature 
+ 
+● Integrated AI-driven features that increased user engagement by ~20%. 
+ 
+and maintainability. 
+● Developed high-performance React Native mobile applications with a strong focus on scalability 
+Jun 2024 – Nov 2024 | Maputo, Mozambique 
+BoleiaChain — Mobile Application Developer 
+ 
+ 
+clients in African markets. 
+● Contribute to AI-assisted decision-making systems serving legal and government-oriented 
+ 
+with proper secret and environment management. 
+● Automate CI/CD with GitHub Actions, deploying containerized microservices to Google Cloud 
+ 
+● Implement secure file ingestion and document indexing pipelines integrated with AI systems. 
+----------------Page (1) Break----------------
+ 
+ Portfolio: LinkedIn, Github 
+Languages: English (Fluent), Portuguese (Native) 
+Additional Information 
+ 
+ 
+shipping production code. 
+GitHub and LinkedIn profiles are available for portfolio review, demonstrating proven experience 
+Portfolio & Experience Proof 
+Self-Taught/Familiarity) 
+adopt new tools like Cursor IDE), GCP, AWS (basic exposure), MLOps fundamentals, Prisma (ORM - 
+Git, GitHub, CI/CD with GitHub Actions, TDD, AI-Assisted Development Workflows (Proven ability to 
+Tools & Platforms: 
+ 
+Systems, NLP, Model Optimization 
+Flask, Django, FastAPI, NestJS (Self-Taught/Familiarity), Chatbot Development, Recommendation 
+Backend & AI: 
+ 
+Principles 
+React Native (Production Experience), ReactJS, Next.js, NodeJS, PostgreSQL, REST/GraphQL APIs, UI/UX 
+Core Mobile & Web Stack: 
+ 
+TypeScript, JavaScript, Python, Java, SQL 
+Languages: 
+Technical Skills 
+ 
+● Worked closely with backend teams to deliver end-to-end features. 
+ 
+UI practices. 
+● Improved frontend performance, reducing page load times by ~25% through optimized code and 
+----------------Page (2) Break----------------

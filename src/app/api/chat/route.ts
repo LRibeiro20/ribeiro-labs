@@ -5,7 +5,8 @@ export async function POST(request: Request) {
   try {
     const { message, history } = await request.json();
 
-    const apiUrl = process.env.NEXT_PUBLIC_AI_SERVER_URL;
+    // Use the backend runtime variable instead of a NEXT_PUBLIC_ one to prevent Next.js from inlining 'undefined' at build time
+    const apiUrl = process.env.AI_PROXY_TARGET;
     const response = await fetch(`${apiUrl}/api/chat`, {
       method: "POST",
       headers: {

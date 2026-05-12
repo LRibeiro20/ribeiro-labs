@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/api-proxy/:path*',
-        destination: `${process.env.AI_PROXY_TARGET}/:path*`, 
+        destination: `${process.env.AI_PROXY_TARGET || 'https://dummy-url.com'}/:path*`, 
       },
     ]
   },

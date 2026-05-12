@@ -19,6 +19,13 @@ RUN npm install -g pnpm@9
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# Capture build arguments and turn them into env vars for Next.js build
+ARG NEXT_PUBLIC_AI_SERVER_URL
+ENV NEXT_PUBLIC_AI_SERVER_URL=$NEXT_PUBLIC_AI_SERVER_URL
+
+ARG AI_PROXY_TARGET
+ENV AI_PROXY_TARGET=$AI_PROXY_TARGET
+
 # Disable Next.js telemetry during build
 ENV NEXT_TELEMETRY_DISABLED=1
 

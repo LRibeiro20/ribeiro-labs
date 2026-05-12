@@ -5,8 +5,8 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Enable pnpm
-RUN corepack enable pnpm
+# Install pnpm 9 (compatible with Node 20)
+RUN npm install -g pnpm@9
 
 COPY package.json pnpm-lock.yaml* ./
 RUN pnpm i --frozen-lockfile
@@ -14,7 +14,7 @@ RUN pnpm i --frozen-lockfile
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
-RUN corepack enable pnpm
+RUN npm install -g pnpm@9
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .

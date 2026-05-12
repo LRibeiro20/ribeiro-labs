@@ -8,7 +8,7 @@ WORKDIR /app
 # Install pnpm 9 (compatible with Node 20)
 RUN npm install -g pnpm@9
 
-COPY package.json pnpm-lock.yaml* ./
+COPY package.json pnpm-lock.yaml* pnpm-workspace.yaml* ./
 RUN pnpm i --frozen-lockfile
 
 # Rebuild the source code only when needed

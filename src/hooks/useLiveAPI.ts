@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback, useRef, useEffect } from "react";
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI } from "@google/genai"; // Removed, using native WebSocket to proxy
 import { useAgenticNavigator } from "./useAgenticNavigator";
 
 // Buffer threshold: accumulate 2048 samples before sending (~128ms at 16kHz).
@@ -141,9 +141,10 @@ export function useLiveAPI() {
           }
           const base64Data = window.btoa(binary);
 
-          sessionRef.current.sendRealtimeInput({
-            audio: { data: base64Data, mimeType: "audio/pcm;rate=16000" }
-          });
+          // Send JSON payload to our Python proxy
+          sessionRef.current.send(JSON.stringify({
+            audio: base64Data
+          }));
         }
       };
       
@@ -176,121 +177,62 @@ export function useLiveAPI() {
       // the context from being permanently suspended.
       audioContextRef.current = new AudioContext({ sampleRate: 16000 });
 
-      const res = await fetch("/api/config");
-      const { apiKey } = await res.json();
-      if (!apiKey) throw new Error("Missing API Key");
+      // Connect to Python FastAPI proxy via Next.js Rewrite
+      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      const wsUrl = `${protocol}//${window.location.host}/api-proxy/ws/live`;
+      const ws = new WebSocket(wsUrl);
+      sessionRef.current = ws;
 
-      // Fetch live GitHub & LinkedIn data
-      let liveProfileData = "";
-      try {
-        const profileRes = await fetch("/api/profile");
-        const { profile } = await profileRes.json();
-        liveProfileData = profile || "";
-      } catch (e) {
-        console.warn("Could not fetch live profile data, using static resume only.");
-      }
+      ws.binaryType = "arraybuffer"; // Important for receiving binary audio
 
-      const ai = new GoogleGenAI({ apiKey });
+      ws.onopen = () => {
+        setIsConnected(true);
+        setIsProcessing(false);
+        startAudioCapture();
 
-      const systemPrompt = `Your name is Nova. You are Luis Ribeiro's AI assistant on his portfolio website. When you introduce yourself, say: "Hi, I'm Nova, Luis Ribeiro's AI assistant." Use a professional, enthusiastic tone. Refer to Luis as "Luis" or "he". 
-
-CRITICAL RULE: You must ONLY mention technologies, frameworks, and tools that are explicitly listed in this prompt. NEVER fabricate or guess technologies. If you don't know something, say so honestly.
-
-SECURITY BOUNDARY: Only answer questions about Luis Ribeiro, his portfolio, skills, experience, and contact. Politely decline unrelated questions.
-
-=== LUIS RIBEIRO'S RESUME ===
-
-Luis Ribeiro — Software Engineer based in Maputo, Mozambique. Open to Remote. Willing to relocate.
-Email: luluribas105@gmail.com | Phone: +258 861469997
-LinkedIn: linkedin.com/in/luis-ribeiro-engineer | GitHub: github.com/LRibeiro20
-
-ABOUT: Innovative Software Engineer with a proven track record of architecting and scaling high-impact digital products from the ground up. He specializes in bridging the gap between cutting-edge machine learning research and production-ready systems. His expertise spans developing robust backend infrastructures with Python (Flask/FastAPI), crafting high-performance mobile experiences using React Native (Expo), and designing scalable cloud-native architectures on GCP.
-
-EDUCATION: Bachelor's Degree in Computer Science — IU International University of Applied Sciences, Germany (Graduated 2025).
-
-EXPERIENCE:
-1. Transdigital — Software Engineer (Jun 2025–Present, Maputo): Architects scalable backend systems using Flask. Builds AI-powered RAG pipelines using Google Vertex AI. Designs cloud-native event-driven architectures with Cloud Run, Cloud Scheduler, and GCS. Automates CI/CD with GitHub Actions. Contributes to AI-assisted decision-making systems for legal and government clients in African markets.
-
-2. BoleiaChain — Mobile Application Developer (Jun 2024–Nov 2024, Maputo): Developed high-performance React Native mobile apps. Integrated AI-driven features increasing user engagement by ~20%. Delivered stable releases with 98% test coverage.
-
-3. Transdigital, Lda — Software Developer (May 2023–Feb 2024, Maputo): Built AI-based chatbot solutions for 5 enterprise clients achieving 98% model accuracy. Optimized ML models reducing error rates by ~50%. Led integration of a recommendation system improving client productivity by ~25%.
-
-4. Upgrade Consultorias, Lda — Frontend Developer (Apr 2022–Mar 2023, Maputo): Built responsive and accessible web interfaces achieving 100% mobile compatibility. Improved frontend performance reducing page load times by ~25%.
-
-TECHNICAL SKILLS:
-Languages: TypeScript, JavaScript, Python, Java, SQL
-Mobile & Web: React Native (Production), ReactJS, Next.js, NodeJS, PostgreSQL, REST/GraphQL APIs
-Backend & AI: Flask, Django, FastAPI, NestJS (familiarity), Chatbot Development, Recommendation Systems, NLP, Model Optimization
-Tools: Git, GitHub, CI/CD with GitHub Actions, TDD, GCP, AWS (basic), MLOps fundamentals, Prisma ORM (familiarity)
-
-PORTFOLIO PROJECTS:
-- Sovereign Intelligence: Private AI Cloud infrastructure for secure, scalable MLOps.
-- Voya: Urban mobility platform with offline-resilient architecture (Flask & React Native).
-- IdentityX Integration: Document validation platform for financial services.
-- Enterprise Agentic Workflows: Agentic AI systems for business dashboards.
-
-Languages spoken: English (Fluent), Portuguese (Native).
-
-${liveProfileData ? `\n${liveProfileData}` : ""}`;
-
-      const config = { 
-        responseModalities: ["AUDIO"],
-        speechConfig: {
-          voiceConfig: {
-            prebuiltVoiceConfig: { voiceName: "Puck" }
+        // Inject initial greeting
+        setTimeout(() => {
+          if (ws.readyState === WebSocket.OPEN) {
+            ws.send(JSON.stringify({ text: "Hello! Introduce yourself by name and say you are Luis Ribeiro's assistant. Keep it brief." }));
           }
-        },
-        systemInstruction: { parts: [{ text: systemPrompt }] }
+        }, 500);
       };
 
-      sessionRef.current = await ai.live.connect({
-        model: "gemini-3.1-flash-live-preview",
-        config: config as any,
-        callbacks: {
-          onopen: () => {
-            console.log("Live API Connected");
-            setIsConnected(true);
-            setIsProcessing(false);
-            startAudioCapture();
-
-            // FIX: Inject an initial greeting so the AI speaks first.
-            // Without this, the Live API waits for human speech before responding.
-            setTimeout(() => {
-              if (sessionRef.current) {
-                sessionRef.current.sendClientContent({
-                  turns: [{ role: "user", parts: [{ text: "Hello! Introduce yourself by name and say you are Luis Ribeiro's assistant. Keep it brief." }] }]
-                });
-              }
-            }, 500);
-          },
-          onmessage: (message: any) => {
-            if (message?.serverContent?.modelTurn?.parts) {
-              const parts = message.serverContent.modelTurn.parts;
-              for (const p of parts) {
-                if (p.text) {
-                  setTranscript(prev => prev + p.text);
-                  const jsonMatch = p.text.match(/```json\n([\s\S]*?)\n```/);
-                  if (jsonMatch) processAction(jsonMatch[1]);
-                }
-                if (p.inlineData && p.inlineData.mimeType.startsWith("audio/pcm")) {
-                  playAudioChunk(p.inlineData.data);
-                }
-              }
+      ws.onmessage = async (event) => {
+        if (typeof event.data === "string") {
+          try {
+            const payload = JSON.parse(event.data);
+            if (payload.text) {
+              setTranscript(prev => prev + payload.text);
+              const jsonMatch = payload.text.match(/```json\n([\s\S]*?)\n```/);
+              if (jsonMatch) processAction(jsonMatch[1]);
             }
-          },
-          onerror: (e: any) => {
-            console.error("Live API Error:", e);
-          },
-          onclose: (e: any) => {
-            console.log("Live API Disconnected. Code:", e?.code, "Reason:", e?.reason);
-            disconnect();
+          } catch (e) {
+            console.error("Error parsing message", e);
           }
+        } else if (event.data instanceof ArrayBuffer) {
+          // It's binary audio data
+          // Convert array buffer to base64 so we can reuse playAudioChunk
+          const bytes = new Uint8Array(event.data);
+          let binary = '';
+          for (let i = 0; i < bytes.length; i++) {
+            binary += String.fromCharCode(bytes[i]);
+          }
+          const base64Data = window.btoa(binary);
+          playAudioChunk(base64Data);
         }
-      });
+      };
+
+      ws.onerror = (e) => {
+        console.error("WebSocket Error:", e);
+      };
+
+      ws.onclose = (e) => {
+        disconnect();
+      };
       
     } catch (error) {
-      console.error("Failed to connect to Live API", error);
-      // Clean up AudioContext if connection failed
+      console.error("Failed to connect to Live API Proxy", error);
       if (audioContextRef.current) {
         audioContextRef.current.close();
         audioContextRef.current = null;
@@ -320,8 +262,8 @@ ${liveProfileData ? `\n${liveProfileData}` : ""}`;
   }, [isConnected, connect, disconnect]);
 
   const sendText = (text: string) => {
-    if (sessionRef.current) {
-      sessionRef.current.sendClientContent({ turns: [{ role: "user", parts: [{ text }] }] });
+    if (sessionRef.current && sessionRef.current.readyState === WebSocket.OPEN) {
+      sessionRef.current.send(JSON.stringify({ text }));
       setTranscript(prev => prev + "\nUser: " + text + "\nAI: ");
     }
   };

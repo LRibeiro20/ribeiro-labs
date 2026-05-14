@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
 };
 
 import Navbar from "@/components/Layout/Navbar";
+import TurnstileWidget from "@/components/UI/TurnstileWidget";
 
 export default function RootLayout({
   children,
@@ -32,9 +34,13 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" />
+      </head>
       <body className="min-h-full flex flex-col">
         <Navbar />
         {children}
+        <TurnstileWidget />
       </body>
     </html>
   );

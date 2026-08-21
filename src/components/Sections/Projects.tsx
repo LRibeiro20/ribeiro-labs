@@ -7,11 +7,6 @@ import { FolderGit2 } from "lucide-react";
 export default function Projects() {
   const projects = [
     {
-      title: "Sovereign Intelligence",
-      description: "A Private AI Cloud infrastructure project focusing on secure, scalable MLOps. Built with Kubernetes (RKE2), Docker, KubeRay, MinIO, and MLflow.",
-      tags: ["Kubernetes", "MLOps", "Private AI"]
-    },
-    {
       title: "Voya",
       description: "An urban mobility and ride-hailing platform featuring an offline-resilient architecture, powered by a Flask backend and React Native (Expo) mobile applications.",
       tags: ["Flask", "React Native", "Offline-Resilient"]

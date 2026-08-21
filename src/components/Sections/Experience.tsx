@@ -6,48 +6,70 @@ import { Briefcase } from "lucide-react";
 export default function Experience() {
   const experiences = [
     {
-      company: "Transdigital",
+      company: "TRANSDIGITAL, LDA",
       role: "Software Engineer",
-      period: "Jun 2024 – Present",
-      location: "Maputo, Mozambique",
+      period: "Jun 2025 - Present",
+      location: "Hybrid",
       description: [
-        "Architect and maintain scalable backend systems using Flask, focusing on secure authentication, messaging, and document workflows.",
-        "Build AI-powered Retrieval-Augmented Generation (RAG) pipelines using Google Vertex AI.",
-        "Design and deploy cloud-native, event-driven architectures with Cloud Run, Cloud Scheduler, and GCS.",
-        "Automate CI/CD with GitHub Actions, deploying containerized microservices to Google Cloud."
+        "Architect and maintain scalable backend systems using Python and Flask, with a focus on secure authentication, document processing, messaging, and enterprise integrations.",
+        "Design and implement REST APIs and microservices supporting production applications and AI-powered workflows.",
+        "Develop Retrieval-Augmented Generation (RAG) pipelines using Google Cloud Vertex AI RAG Engine to enable AI-powered question answering over legal gazettes and user-uploaded documents.",
+        "Design event-driven and asynchronous workflows using Google Cloud Run and Cloud Scheduler Jobs for document ingestion and AI processing.",
+        "Build secure document processing pipelines integrating Flask services, Google Cloud Storage, and Vertex AI RAG.",
+        "Automate CI/CD workflows using GitHub Actions for containerized microservices deployed to Google Cloud Run, including environment configuration, secret management, and container image versioning.",
+        "Troubleshoot and support production systems, investigating integration, API, deployment, and application-level issues.",
+        "Develop and support enterprise biometric identity and authentication solutions using Daon IdentityX.",
+        "Develop and integrate Java-based services and Android applications with biometric identity and authentication platforms.",
+        "Implement and maintain microservices responsible for integrating mobile applications, biometric SDKs, backend services, and enterprise systems.",
+        "Support client implementations by troubleshooting integration issues, customizing solutions, and assisting with deployment and production support.",
+        "Work with enterprise and banking-related clients, including BCI-related biometric identity solutions."
       ]
+    },
+    {
+      company: "MozDigitalHub",
+      role: "Artificial Intelligence Engineer",
+      period: "Apr 2024 - Feb 2025",
+      location: "EMEA · Remote",
+      description: []
     },
     {
       company: "BoleiaChain",
       role: "Mobile Application Developer",
-      period: "Jun 2024 – Nov 2024",
-      location: "Maputo, Mozambique",
+      period: "Jun 2024 - Nov 2024",
+      location: "Hybrid",
       description: [
-        "Developed high-performance React Native mobile applications with a strong focus on scalability and maintainability.",
-        "Integrated AI-driven features that increased user engagement by ~20%.",
-        "Delivered stable releases with 98% test coverage, supporting rapid iteration."
+        "Mobile App Development: Writing and reviewing code to create mobile applications using React Native, ensuring they are efficient, functional, and high quality.",
+        "Software Architecture: Designing the application architecture, choosing best practices and standards to ensure scalability, performance, and maintenance.",
+        "API Integration: Working on integrating APIs, artificial intelligence, and external services, ensuring that applications can communicate correctly with other parts of the digital platform.",
+        "Problem Solving: Identifying and resolving technical issues that arise during development, using debugging and testing to ensure application functionality.",
+        "Continuous Improvement: Suggesting improvements and optimizations for existing code, always seeking to increase the efficiency and quality of the application.",
+        "Mentoring and Training: Providing guidance and support to other developers on the team, helping them solve problems and improve their skills.",
+        "Documentation: Maintaining clear and detailed documentation of code and development processes to facilitate future maintenance and scalability.",
+        "Technological Update: Staying updated with the latest trends and advancements in React Native technology and mobile development in general, to ensure the platform uses the best practices and tools available.",
+        "Testing and Quality: Implementing unit and functional tests to ensure the application is robust and bug-free before release."
       ]
     },
     {
-      company: "Transdigital, Lda",
+      company: "TRANSDIGITAL, LDA",
       role: "Software Developer",
-      period: "May 2023 – Feb 2024",
+      period: "May 2023 - Feb 2024",
       location: "Maputo, Mozambique",
-      description: [
-        "Built and deployed AI-based chatbot solutions for 5 enterprise clients, achieving 98% model accuracy and 95% client satisfaction.",
-        "Optimized ML models, reducing error rates by ~50% through continuous training and tuning.",
-        "Led integration of a recommendation system, improving client productivity by ~25%."
-      ]
+      description: []
     },
     {
       company: "Upgrade Consultorias, Lda",
       role: "Frontend Developer",
-      period: "Apr 2022 – Mar 2023",
+      period: "Apr 2022 - Mar 2023",
       location: "Maputo, Mozambique",
       description: [
-        "Built responsive and accessible web interfaces, achieving 100% mobile compatibility.",
-        "Improved frontend performance, reducing page load times by ~25% through optimized code.",
-        "Worked closely with backend teams to deliver end-to-end features."
+        "Developed, tested, and maintained production-quality web applications using modern software engineering practices.",
+        "Built responsive frontend applications using JavaScript and React.",
+        "Designed software components with a focus on scalability, maintainability, and performance.",
+        "Integrated payment APIs and external services into web applications.",
+        "Collaborated with designers and developers to deliver a new e-commerce platform, contributing to a 25% increase in online sales.",
+        "Implemented responsive user interfaces that contributed to a 20% increase in user engagement and a 15% reduction in bounce rates.",
+        "Used Git for source control and collaborative software development.",
+        "Investigated and resolved application issues through debugging, testing, and continuous code improvement."
       ]
     }
   ];

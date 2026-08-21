@@ -32,10 +32,21 @@ export default function About() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">About Me</h2>
-          <p className="text-white/60 max-w-2xl mx-auto text-lg">
-            I build intelligent, offline-resilient architectures that bring AI capabilities to edge environments and secure private clouds.
-          </p>
+          <h2 className="text-3xl md:text-5xl font-bold mb-8">About Me</h2>
+          <div className="text-white/70 max-w-4xl mx-auto text-lg space-y-6 text-left">
+            <p>
+              I build and scale end-to-end AI systems that move beyond experimentation into real-world, high-reliability production environments. My work focuses on architecting intelligent systems powered by large language models, retrieval-augmented generation (RAG), and agentic workflows, with strong emphasis on performance, observability, and cost-efficient scaling.
+            </p>
+            <p>
+              I have deep experience engineering backend systems in Python (FastAPI/Flask), designing cloud-native architectures on GCP, and delivering robust cross-platform applications using React Native (Expo). My engineering approach prioritizes system design, scalability, and reliability over isolated model experimentation.
+            </p>
+            <p>
+              My core expertise includes LLM integration, AI orchestration, retrieval systems, vector search, and production AI infrastructure. I specialize in identifying and solving bottlenecks across AI pipelines—from retrieval quality and latency optimization to prompt and context engineering.
+            </p>
+            <p>
+              I operate at the intersection of software engineering and applied AI, building systems that transform state-of-the-art AI capabilities into dependable, production-ready products at scale.
+            </p>
+          </div>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8">

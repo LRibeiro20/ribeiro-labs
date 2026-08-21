@@ -14,7 +14,7 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2 font-mono font-bold text-lg tracking-tight">
           <Terminal size={20} className="text-accent" />
-          <span>LuisRibeiro<span className="text-primary">.ai</span></span>
+          <span>Luis Ribeiro</span>
         </div>
         <div className="hidden md:flex gap-6 text-sm font-medium text-white/70">
           <a href="#about" className="hover:text-white transition-colors">About</a>
